@@ -326,6 +326,9 @@
                 .replace( /([\\'])/g, "\\$1" )
                 .replace( /[\r\t\n]/g, " " )
                 .replace( /\$\{([^\}]*)\}/g, "{{= $1}}" )
+                .replace( /\<\%\=(.*?)\%\>/g, "{{= $1}}" )
+                .replace( /\<\%(.*?)\%\>/g, "{{$1}}" )
+                .replace( /\{\{(.*?)\}\}/g, function(all, str){ return "{{"+jQuery.trim(str)+"}}" })
                 .replace( /\{\{(\/?)(\w+|.)(?:\(((?:[^\}]|\}(?!\}))*?)?\))?(?:\s+(.*?)?)?(\(((?:[^\}]|\}(?!\}))*?)\))?\s*\}\}/g,
                 function( all, slash, type, fnargs, target, parens, args ) {
                     var tag = jQuery.tmpl.tag[ type ], def, expr, exprAutoFnDetect;
